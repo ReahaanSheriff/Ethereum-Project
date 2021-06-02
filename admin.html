@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+  <title>ADMIN</title>
+
+  <!-- Bootstrap core CSS -->
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-grad-school.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/lightbox.css">
+
+  <!-- WEB3 CDN -->
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@0.18.2/dist/web3.min.js"></script>
+
+</head>
+
+<body>
+
+
+  <!--header-->
+  <header class="main-header clearfix" role="header">
+    <div class="logo">
+      <a href="home.html"><em>My</em> University</a>
+    </div>
+    <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
+    <nav id="menu" class="main-nav" role="navigation">
+      <ul class="main-menu">
+        <li><a href="#top">Home</a></li>
+        <li><a href="#top2">students and faculty</a></li>
+        <li><a href="#top4">Enroll Studednt</a></li>
+        <li><a href="#top5">Courses</a></li>
+        <li><a href="home.html" id="login">logout</a></li>
+        <li><a href="admin.html" id="logout">logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ***** Main Banner Area Start ***** -->
+  <section class="section main-banner" id="top" data-section="section1">
+    <video autoplay muted loop id="bg-video">
+     
+    </video>
+
+    <div class="video-overlay header-text">
+      <div class="caption">
+       
+        <h2><em>Hello</em> Admin</h2>
+        <div class="main-button">
+          <p>
+            <a class="btn btn-primary tog" data-toggle="collapse" href="#multiCollapseExample1" role="button"
+              aria-expanded="false" aria-controls="multiCollapseExample1" id="stdCount">No of Students</a>
+            <a class="btn btn-primary tog" data-toggle="collapse" href="#multiCollapseExample2" role="button"
+              aria-expanded="false" aria-controls="multiCollapseExample2" id="profCount">No of Professors</a>
+            <a class="btn btn-primary tog" data-toggle="collapse" href="#multiCollapseExample3" role="button"
+              aria-expanded="false" aria-controls="multiCollapseExample3" id="courseCount">No of courses</a>
+          </p>
+
+          <!-- Multiple Targets START-->
+
+
+
+          <div class="row">
+            <div class="col">
+              <div class="collapse multi-collapse" id="multiCollapseExample1">
+                <div class="card card-body">
+                  <p id="stdCountValue" style="font-size: large;"></p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="collapse multi-collapse" id="multiCollapseExample2">
+                <div class="card card-body">
+                  <p id="profCountValue" style="font-size: large;"></p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="collapse multi-collapse" id="multiCollapseExample3">
+                <div class="card card-body">
+                  <p id="courseCountValue" style="font-size: large;"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multiple Targets END-->
+
+      </div>
+    </div>
+  </section>
+ 
+  <section class="section why-us" data-section="section2" id="top2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-heading">
+            <h2>Students and Faculty</h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+
+          <section class='tabs-content'>
+
+            <div id="accordion">
+              <div class="card">
+                <div class="card-header" id="headingOne" style="background-color: #eb505d;">
+                  <h5 class="mb-0 text-center">
+                    <button class="btn btn-link" id="allstudents"
+                      style="color: white;font-size: 15px;font-weight: 700;letter-spacing: 0.5px;"
+                      data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                      aria-controls="collapseOne">
+                      ALL STUDENTS
+                    </button>
+                  </h5>
+
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+
+                  <!-- <span class="input-group-text" id="inputGroup-sizing-sm"></span>  data-toggle='modal' data-target='#exampleModalLong2' -->
+
+
+
+
+                  <div class="input-group mb-3" style="width: 400px;align-items: center;margin: auto;">
+                    <input type="number" id="searchtext" style="background-color: rgba(51, 44, 45, 0.99);color: wheat;"
+                      class="form-control" placeholder="Search by ID" aria-label="Recipient's username"
+                      aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-danger" id="find" type="button">Search</button>
+                    </div>
+                  </div>
+                  <!-- <td><a href='#' id='view' class='btn btn-danger kk'  data-toggle='modal' data-target='#exampleModalLong2'>view</a></td> -->
+                  <div class="card-body" style="background-color: wheat;">
+
+                    <div class="clsscroll">
+
+                      <table class="table table-hover table-dark">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Degree</th>
+                            <th scope="col">Year</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody id="tbody">
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingTwo" style="background-color: #eb505d;">
+                  <h5 class="mb-0 text-center">
+                    <button class="btn btn-link collapsed"
+                      style="color: white;font-size: 15px;font-weight: 700;letter-spacing: 0.5px;"
+                      data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                      aria-controls="collapseTwo">
+                      ALL PROFESSORS
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+
+                  <div class="input-group mb-3" style="width: 400px;align-items: center;margin: auto;">
+                    <input type="number" id="searchprofs" style="background-color: rgba(51, 44, 45, 0.99);color: wheat;"
+                      class="form-control" placeholder="Search by ID" aria-label="Recipient's username"
+                      aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-danger" id="search" type="button">Search</button>
+                    </div>
+                  </div>
+
+                  <div class="card-body" style="background-color: wheat;">
+                    <div class="clsscroll">
+
+                      <table class="table table-hover table-dark">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Department</th>
+                          </tr>
+                        </thead>
+                        <tbody id="pbody">
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+
+
+  <section class="section coming-soon" data-section="section4" id="top4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-5">
+          <div class="right-content">
+            <div class="top-content">
+              <h6><em>Enroll new students</em></h6>
+            </div>
+            <div id="contact">
+              <div class="row">
+                <div class="col-md-12">
+                  <fieldset>
+                    <input type="number" id="id" name="login" placeholder="Student ID">
+                  </fieldset>
+                </div>
+                <div class="col-md-12">
+                  <fieldset>
+                    <input type="number" id="dob" name="login" placeholder="Date Of Birth (DDMMYYYY)">
+                  </fieldset>
+                </div>
+                <div class="col-md-12">
+                  <fieldset>
+                    <input type="text" id="fname" name="login" placeholder="First Name">
+                  </fieldset>
+                </div>
+                <div class="col-md-12">
+                  <fieldset>
+                    <input type="text" id="dept" name="login" placeholder="Department">
+                  </fieldset>
+                </div>
+                <div class="col-md-12">
+                  <fieldset>
+                    <input type="text" id="degree" name="login" placeholder="Degree">
+                  </fieldset>
+                </div>
+                <div class="col-md-12">
+                  <fieldset>
+                    <input type="number" id="year" name="login" placeholder="Year">
+                  </fieldset>
+                </div>
+                <div class="col-md-12">
+                  <fieldset>
+                    <button type="submit" id="form-submit" class="button enroll">Enroll</button>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section courses" data-section="section5" id="top5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-heading" id="sectioncourses">
+            <h2>Courses Offered</h2>
+          </div>
+        </div>
+        <!-- style='width: 18rem;margin-left: 50px;margin-right: 50px;' -->
+        <div id="c" class="row">
+          
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p><i class="fa fa-copyright"></i> &nbsp;Reahaan Sheriff</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- Modal for viewing details of particular student-->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Details</th>
+              </tr>
+            </thead>
+            <tbody id="newdetails">
+              
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <h5 id="stdDetails"></h5>
+  <!-- Scripts -->
+  <script src="assets/js/abi.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script> -->
+  <script src="assets/js/web3.js"></script>
+
+  <!-- Scripts -->
+  <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <!-- Bootstrap core JavaScript -->
+  <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- <script src="assets/js/isotope.min.js"></script> -->
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/lightbox.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/video.js"></script>
+  <script src="assets/js/slick-slider.js"></script>
+  <script src="assets/js/custom.js"></script>
+  <script>
+
+
+
+
+var id=window.location.search;
+var myid = id.slice(9,);
+console.log(myid);
+
+if(id==""){
+  $("#logout").hide();
+  $("#login").show();
+} else{
+  $("#logout").show();
+  $("#login").hide();
+}
+
+window.history.forward();
+    function noBack() {
+      window.history.forward();
+    }
+
+    //Enrolling Student
+
+    var temps = [];
+    var idss = [];
+    $("#form-submit").click(function () {
+
+      if (($("#id").val() != "") && ($("#dob").val() != "") && ($("#fname").val() != "") && ($("#dept").val() != "") && ($("#degree").val() != "") && ($("#year").val() != "")) {
+        AttendanceManagement.getStudents(function (error, result) {
+
+          if (!error) {
+            $.each(result, function (index, value) {
+
+              temps.push(value);
+              for (var i = 0; i < temps.length; i++) {
+                idss.push(temps[i]["c"][0]);
+              }
+            });
+
+            if (idss.includes(parseInt($("#id").val())) === true) {
+              alert("id already there");
+
+            } else {
+              AttendanceManagement.createStudent(parseInt($("#id").val()), parseInt($("#dob").val()), $("#fname").val(), $("#dept").val(), $("#degree").val(), parseInt($("#year").val()), {from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
+              alert('Enrolled successfully');
+            }
+          }
+          else
+            console.error(error);
+        });
+      } else {
+        alert('Empty fields not allowed');
+      }
+    });
+
+
+
+    // Counting No of students
+
+
+    $("#stdCount").click(function () {
+      AttendanceManagement.countStudents(function (error, result) {
+        if (!error) {
+          $("#stdCountValue").html(result["c"][0]);
+
+          console.log(result["c"][0]);
+        }
+        else
+          console.error(error);
+      });
+    });
+
+
+    // Counting No of Professors
+
+
+    $("#profCount").click(function () {
+      AttendanceManagement.countTeachers(function (error, result) {
+        if (!error) {
+          $("#profCountValue").html(result["c"][0]);
+
+          console.log(result);
+        }
+        else
+          console.error(error);
+      });
+    });
+
+    // Counting No of Courses
+
+
+    $("#courseCount").click(function () {
+      AttendanceManagement.countTeachers(function (error, result) {
+        if (!error) {
+          $("#courseCountValue").html(result["c"][0]);
+
+          console.log(result);
+        }
+        else
+          console.error(error);
+      });
+    });
+
+
+
+
+
+    //For getting all Students Details
+    // <td><button class='btn btn-danger' onclick='viewstudent("+result[0]+")' type='button' data-toggle='modal' data-target='#exampleModalLong2'>view</button></td>
+
+    AttendanceManagement.getStudents(function (error, result) {
+      if (!error) {
+        $.each(result, function (index, value) {
+          AttendanceManagement.getParticularStudent(value, function (error, result) {
+            if (!error) {
+              $("#tbody").append("<tr><th scope='row'>" + (index + 1) + "</th><td>" + result[0] + "</td><td>" + result[1] + "</td><td>" + result[3] + "</td><td>" + result[4] + "</td><td>" + result[5] + "</td><td><button class='btn btn-danger' onclick='viewstudent("+result[0]+")' type='button' data-toggle='modal' data-target='#exampleModalLong2'>view</button></td></tr>");
+
+             
+
+
+              console.log(result);
+            }
+            else
+              console.error(error);
+          });
+        });
+        console.log(result[0]);
+      }
+      else
+        console.error(error);
+    });
+
+
+    function viewstudent(id){
+      AttendanceManagement.getParticularStudent(id, function (error, result) {
+                if (!error) {
+
+                  $("#newdetails").html("<tr><th scope='row'>1</th><td>Id</td><td>"+result[0]+"</td></tr><tr><th scope='row'>2</th><td>Name</td><td>"+result[1]+"</td></tr><th scope='row'>3</th><td>Attendance</td><td>"+result[2]+"</td></tr><tr><th scope='row'>4</th><td>Department</td><td>"+result[3]+"</td></tr><tr><th scope='row'>5</th><td>Degree</td><td>"+result[4]+"</td></tr><tr><th scope='row'>6</th><td>Year</td><td>"+result[5]+"</td></tr><tr><th scope='row'>7</th><td>Date of birth</td><td>"+result[6]+"</td></tr>");
+                  // $("#stdDetails").html('Name: ' + result[0] + '<br />' + 'Attendace: ' + result[1] + '<br />' + 'Department : ' + result[2] + '<br />' + 'Degree: ' + result[3] + '<br />' + 'Year: ' + result[4]);
+                  
+                  // $("#no").append("<tr><th scope='row'>"+(index+1)+"</tr></th>"+'<br />');
+                  //   $("#tid").append("<tr><td>"+result[0]+"</tr></td>"+'<br />');
+                  //   $("#tname").append("<tr><td>"+result[1]+"</tr></td>"+'<br />');
+                  // + '<br />' + 'Attendace: ' + result[1] + '<br />' + 'Department : ' + result[2] + '<br />' + 'Degree: ' + result[3] + '<br />' + 'Year: ' + result[4] + '<br />');
+                  console.log(result);
+                }
+      });
+                AttendanceManagement.seeCourse(id, function (error, result) {
+                $("#newdetails").append("<tr><th scope='row'>8</th><td>Course</td><td>"+result+"</td></tr>");
+                if (!error) {
+                  $('#myModal').modal('show');
+                  console.log(result);
+                }
+                else
+                  console.error(error);
+
+              });
+  }
+  
+
+
+    //For getting all Courses Details
+    //<td><a href='#' id='view' class='btn btn-danger kk'  data-toggle='modal' data-target='#exampleModalLong2'>view</a></td>
+
+    AttendanceManagement.getTeachers(function (error, result) {
+      if (!error) {
+        $.each(result, function (index, value) {
+          AttendanceManagement.getParticularTeacher(value, function (error, result) {
+            if (!error) {
+
+
+              
+              $("#c").append("<div class='card m-3' style='width: 18rem;'><img class='card-img-top' src='assets/images/courses-01.jpg' alt='Card image cap'><div class='card-body'><h4 id='cname'>"+result[2]+"</h4><p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card content</p><label for='tname' style='float: right; font-size: smaller;''><span>- </span>"+result[1]+"</label></div></div>");
+
+             
+
+
+              console.log(result);
+            }
+            else
+              console.error(error);
+          });
+        });
+        console.log(result[0]);
+      }
+      else
+        console.error(error);
+    });
+
+    //For getting all Professors Details
+    //<td><a href='#' id='view' class='btn btn-danger kk'  data-toggle='modal' data-target='#exampleModalLong2'>view</a></td>
+
+    AttendanceManagement.getTeachers(function (error, result) {
+      if (!error) {
+        $.each(result, function (index, value) {
+          AttendanceManagement.getParticularTeacher(value, function (error, result) {
+            if (!error) {
+              $("#pbody").append("<tr><th scope='row'>" + (index + 1) + "</th><td>" + result[0] + "</td><td>" + result[1] + "</td><td>" + result[2] + "</td><td>" + result[3] + "</td></tr>");
+
+              // $("#no").append("<tr><th scope='row'>"+(index+1)+"</tr></th>"+'<br />');
+              //   $("#tid").append("<tr><td>"+result[0]+"</tr></td>"+'<br />');
+              //   $("#tname").append("<tr><td>"+result[1]+"</tr></td>"+'<br />');
+              // + '<br />' + 'Attendace: ' + result[1] + '<br />' + 'Department : ' + result[2] + '<br />' + 'Degree: ' + result[3] + '<br />' + 'Year: ' + result[4] + '<br />');
+
+
+              console.log(result);
+            }
+            else
+              console.error(error);
+          });
+        });
+        console.log(result[0]);
+      }
+      else
+        console.error(error);
+    });
+
+
+
+
+// Search student
+    var tempo = [];
+    var sid = [];
+    // Search for students
+    $('#find').click(function () {
+      if ($("#searchtext").val() != "") {
+        AttendanceManagement.getStudents(function (error, result) {
+
+          if (!error) {
+            $.each(result, function (index, value) {
+
+              tempo.push(value);
+              for (var i = 0; i < tempo.length; i++) {
+                sid.push(tempo[i]["c"][0]);
+              }
+            });
+            if (sid.includes(parseInt($("#searchtext").val())) === true) {
+
+              AttendanceManagement.getParticularStudent($("#searchtext").val(), function (error, result) {
+                if (!error) {
+
+                  $("#newdetails").html("<tr><th scope='row'>1</th><td>Id</td><td>"+result[0]+"</td></tr><tr><th scope='row'>2</th><td>Name</td><td>"+result[1]+"</td></tr><th scope='row'>3</th><td>Attendance</td><td>"+result[2]+"</td></tr><tr><th scope='row'>4</th><td>Department</td><td>"+result[3]+"</td></tr><tr><th scope='row'>5</th><td>Degree</td><td>"+result[4]+"</td></tr><tr><th scope='row'>6</th><td>Year</td><td>"+result[5]+"</td></tr><tr><th scope='row'>7</th><td>Date of birth</td><td>"+result[6]+"</td></tr>");
+                
+
+
+                  console.log(result);
+                }
+                else
+                  console.error(error);
+              });
+              AttendanceManagement.seeCourse($("#searchtext").val(), function (error, result) {
+                $("#newdetails").append("<tr><th scope='row'>8</th><td>Course</td><td>"+result+"</td></tr>");
+                if (!error) {
+                  console.log(result);
+                  $('#myModal').modal('show');
+                }
+                else
+                  console.error(error);
+
+              });
+            } else {
+              alert('ID does not exists');
+            }
+          }
+        });
+      } else {
+        alert("Empty text box");
+        $('#myModal').modal('hide');
+      }
+    });
+
+
+    
+// Search Professor
+var tempp = [];
+    var tid = [];
+    // Search for students
+    $('#search').click(function () {
+      if ($("#searchprofs").val() != "") {
+        AttendanceManagement.getTeachers(function (error, result) {
+
+          if (!error) {
+            $.each(result, function (index, value) {
+
+              tempp.push(value);
+              for (var i = 0; i < tempp.length; i++) {
+                tid.push(tempp[i]["c"][0]);
+              }
+            });
+            if (tid.includes(parseInt($("#searchprofs").val())) === true) {
+
+              AttendanceManagement.getParticularTeacher($("#searchprofs").val(), function (error, result) {
+                if (!error) {
+
+                  $("#newdetails").html("<tr><th scope='row'>1</th><td>Id</td><td>"+result[0]+"</td></tr><tr><th scope='row'>2</th><td>Name</td><td>"+result[1]+"</td></tr><th scope='row'>3</th><td>Course</td><td>"+result[2]+"</td></tr><tr><th scope='row'>4</th><td>Department</td><td>"+result[3]+"</td></tr>");
+                
+                  $('#myModal').modal('show');
+
+                  console.log(result);
+                }
+                else
+                  console.error(error);
+              });
+              
+            } else {
+              alert('ID does not exists');
+            }
+          }
+        });
+      } else {
+        alert("Empty text box");
+        $('#myModal').modal('hide');
+      }
+    });
+
+    // Toggling for no of students... textbox
+    $('.tog').on('mouseenter', function () {
+      $(this).css("background-color", "#F83243;");
+    });
+
+
+
+    // //according to loftblog tut
+    // $('.nav li:first').addClass('active');
+
+    // var showSection = function showSection(section, isAnimate) {
+    //   var
+    //     direction = section.replace(/#/, ''),
+    //     reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+    //     reqSectionPos = reqSection.offset().top - 0;
+
+    //   if (isAnimate) {
+    //     $('body, html').animate({
+    //       scrollTop: reqSectionPos
+    //     },
+    //       800);
+    //   } else {
+    //     $('body, html').scrollTop(reqSectionPos);
+    //   }
+
+    // };
+
+    var checkSection = function checkSection() {
+      $('.section').each(function () {
+        var
+          $this = $(this),
+          topEdge = $this.offset().top - 80,
+          bottomEdge = topEdge + $this.height(),
+          wScroll = $(window).scrollTop();
+        if (topEdge < wScroll && bottomEdge > wScroll) {
+          var
+            currentId = $this.data('section'),
+            reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+          reqLink.closest('li').addClass('active').
+            siblings().removeClass('active');
+        }
+      });
+    };
+
+    // $('.main-menu, .scroll-to-section').on('click', 'a', function (e) {
+    //   if ($(e.target).hasClass('external')) {
+    //     return;
+    //   }
+    //   e.preventDefault();
+    //   $('#menu').removeClass('active');
+    //   showSection($(this).attr('href'), true);
+    // });
+
+    $(window).scroll(function () {
+      checkSection();
+    });
+  </script>
+</body>
+
+</html>

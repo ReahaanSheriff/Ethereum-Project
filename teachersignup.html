@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Professor Signup</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="assets/css/login.css">
+      
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-grad-school.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/lightbox.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- WEB3 CDN -->
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@0.18.2/dist/web3.min.js"></script>
+</head>
+
+<body>
+     <!--header-->
+  <header class="main-header clearfix" role="header">
+    <div class="logo">
+      <a href="home.html"><em>My</em> University</a>
+    </div>
+  </header>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+
+            <!-- Icon -->
+            <div class="fadeIn first" id="t_icon_bg">
+                <img src="assets/images/teacher2.png" id="t_icon" alt="User Icon" />
+            </div>
+
+            <!-- Login Form -->
+            <div>
+                <input type="number" id="id" class="fadeIn third" name="login" placeholder="Professor ID" required>
+                <input type="text" id="name" class="fadeIn third" name="login" placeholder="Name" required>
+                <input type="text" id="course" class="fadeIn third" name="login" placeholder="Course" required>
+                <input type="text" id="dept" class="fadeIn third" name="login" placeholder="Department" required>
+                <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password" required>
+                <input type="submit" class="fadeIn fourth" value="Sign up" id="signup">
+                <!-- <input type="submit" class="fadeIn fourth" value="Course" id="c"> -->
+                <label style="color: white;">Already have an account?&nbsp;<a href="teacherlogin.html"
+                        id="reg">Login</a></label>
+            </div>
+            <h5 id="message" style="color: white;"></h5>
+            <!-- <h4 id="coursemsg"></h4> -->
+        </div>
+
+    </div>
+
+
+    <script src="assets/js/abi.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="assets/js/web3.js"></script>
+
+    <script>
+        var allCourses = [];
+        var temp = [];
+        var ids = [];
+       
+        $("#signup").click(function () {
+            if (($("#id").val() != "") && ($("#name").val() != "") && ($("#course").val() != "") && ($("#dept").val() != "") && ($("#password").val() != "")) {
+
+
+                AttendanceManagement.getTeachers(function (error, result) {
+
+                    if (!error) {
+
+                        $.each(result, function (index, value) {
+                            AttendanceManagement.getParticularTeacher(value, function (error, result) {
+
+                                if (!error) {
+                                    allCourses.push(result[2]);
+                                    //$("#coursemsg").append('Course: ' + result[2] + '<br />');
+
+
+                                    //console.log(result);
+                                    console.log(allCourses);
+
+                                }
+                                else {
+                                    console.error(error);
+                                }
+
+                            });
+                            temp.push(value);
+                            for (var i = 0; i < temp.length; i++) {
+                                ids.push(temp[i]["c"][0]);
+                            }
+
+                        });
+
+                        if (ids.includes(parseInt($("#id").val())) === true) {
+                            alert("id already there");
+
+                        }else if(allCourses.includes($("#course").val()) == true){
+                            alert("course already there");
+                        }else {
+                            AttendanceManagement.createTeacher(parseInt($("#id").val()), $("#name").val(), $("#course").val(), $("#dept").val(), $("#password").val(), {from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
+                            $("#message").html("Registered successfully");
+                        }
+                    }
+                    else
+                        console.error(error);
+                });
+            } else {
+                alert('Empty fields not allowed');
+            }
+        });
+
+        // //to view all courses
+        // $("#c").click(function () {
+
+
+        //     $("#coursemsg").html("")
+        //     AttendanceManagement.getTeachers(function (error, result) {
+
+        //         if (!error) {
+        //             $.each(result, function (index, value) {
+        //                 AttendanceManagement.getParticularTeacher(value, function (error, result) {
+
+        //                     if (!error) {
+        //                         allCourses.push(result[2]);
+        //                         $("#coursemsg").append('Course: ' + result[2] + '<br />');
+
+
+        //                         //console.log(result);
+        //                         console.log(allCourses);
+
+        //                     }
+        //                     else {
+        //                         console.error(error);
+        //                     }
+
+        //                 });
+
+        //             });
+
+        //             //console.log(result[0]);
+
+        //         }
+        //         else
+        //             console.error(error);
+        //     });
+
+        // });
+
+
+
+
+
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
