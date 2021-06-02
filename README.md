@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-
-=======
-# Ethereum-Project
-A Blockchain based Attendance Management system project done in solidity language compiler version 0.4.18
->>>>>>> 385cc9d6abe31e3ea916f0c4f8ab6c27e8fc0e13
 # STEPS OF SETUP:
 1. Open the attendance.sol file, Test and compile using Remix ide. <br />
 2. Once it is working efficiently, npm i to install node modules and then install Web3.js by npm install web3 in the local computer.<br />
