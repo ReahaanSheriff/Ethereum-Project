@@ -113,20 +113,6 @@ var abi =  [
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_studId",
-				"type": "uint256"
-			}
-		],
-		"name": "decrementAttendance",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [
 			{
@@ -472,6 +458,10 @@ var abi =  [
 		"constant": true,
 		"inputs": [
 			{
+				"name": "_id",
+				"type": "address"
+			},
+			{
 				"name": "_password",
 				"type": "string"
 			}
@@ -509,10 +499,29 @@ var abi =  [
 				"type": "uint256"
 			}
 		],
-		"name": "incrementAttendance",
+		"name": "addAttendance",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_studId",
+				"type": "uint256"
+			}
+		],
+		"name": "incrementAttendance",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{

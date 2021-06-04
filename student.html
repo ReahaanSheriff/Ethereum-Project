@@ -40,8 +40,8 @@
         <li><a href="#top">Home</a></li>
         <li><a href="#bg">My Courses</a></li>
         <li><a href="#" data-toggle="modal" id="profile" data-target="#exampleModalLong2">My Profile</a></li>
-        <li><a href="student.html" id="logout">Logout</a></li>
-        <li><a href="studentlogin.html" id="login">Login</a></li>
+        <li><a href="home.html" id="logout">Logout</a></li>
+        <li><a href="student.html" id="login">Login</a></li>
       </ul>
     </nav>
   </header>
@@ -101,11 +101,7 @@
                 <input name="Number" type="text" class="form-control" id="myid" placeholder="Your ID">
               </fieldset>
             </div>
-            <div class="col-md-6">
-              <fieldset>
-                <input name="name" type="text" class="form-control" id="myname" placeholder="Your name">
-              </fieldset>
-            </div>
+            
             <div class="col-md-12">
               <fieldset>
                 <input name="message" rows="6" class="form-control" id="mycourse" placeholder="Your course name..."
@@ -215,6 +211,38 @@
   </div>
 </div>
 
+
+
+
+<!-- Modal for Tracking Attendance-->
+<div class="modal fade" id="exampleModalLong3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Attendence History</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Date and Time</th>
+            </tr>
+          </thead>
+          <tbody id="attend"></tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- Scripts -->
   <script src="assets/js/abi.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -255,7 +283,7 @@ if(id==""){
                   
 //MY profile
 $("#profile").click(function(){
-  AttendanceManagement.getParticularStudent(myid, function (error, result) {
+  AttendanceManagement.getParticularStudent(myid,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
                 if (!error) {
                   var my = result[0];
                   $("#profilebody").html("<tr><th scope='row'>1</th><td>id</td><td>"+result[0]+"</td></tr><tr><th scope='row'>2</th><td>name</td><td>"+result[1]+"</td></tr><tr><th scope='row'>3</th><td>Date Of Birth</td><td>"+result[6]+"</td></tr><tr><th scope='row'>4</th><td>Department</td><td>"+result[3]+"</td></tr><tr><th scope='row'>5</th><td>Degree</td><td>"+result[4]+"</td></tr><tr><th scope='row'>6</th><td>Year</td><td>"+result[5]+"</td></tr>");
@@ -269,7 +297,7 @@ $("#profile").click(function(){
               });
   
 });
-AttendanceManagement.getParticularStudent(myid, function (error, result) {
+AttendanceManagement.getParticularStudent(myid,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
                 if (!error) {
                   $("#name").html(result[1]);
 
@@ -281,17 +309,21 @@ AttendanceManagement.getParticularStudent(myid, function (error, result) {
 
 
 // Course
-var c = AttendanceManagement.seeCourse(myid);
+var c = AttendanceManagement.seeCourse(myid,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895", gas: 3000000 });
 $("#mycoursename").html(c);
 // Enrolling course
 
 $("#form-submit").click(function(){
-  if(($("myid").val() != "") && ($("myname").val() != "") && ($("mycourse").val() != "")){
+  if(($("#myid").val() != "") && ($("#mycourse").val() != "")){
+    if($("#myid").val() == myid){
     if(c == ""){
-      AttendanceManagement.enrollCourse(parseInt($("#myid").val()),$("#mycourse").val(),{ gas: 3000000 });
-      }else{
+      AttendanceManagement.enrollCourse(parseInt($("#myid").val()),$("#mycourse").val().toLowerCase(),{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895", gas: 3000000 });
+    }else{
         alert("Already enrolled");
       }
+    }else{
+      alert("Incorrect data");
+    }
   }else{
       alert("Empty fields not allowed");
     }
@@ -302,10 +334,10 @@ $("#form-submit").click(function(){
 var i = AttendanceManagement.tecourse(c)[0];
 var n = AttendanceManagement.tecourse(c)[1];
 $("#specific").click(function(){
-  AttendanceManagement.getParticularStudent(myid, function (error, result) {
+  AttendanceManagement.getParticularStudent(myid,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
                 if (!error) {
                   var att = result[2];
-                  $("#viewcourse").html("<tr><th scope='row'>1</th><td>course name</td><td>"+c+"</td></tr><tr><th scope='row'>2</th><td>professor id</td><td>"+i+"</td></tr><tr><th scope='row'>3</th><td>professor name</td><td>"+n+"</td></tr><tr><th scope='row'>4</th><td>Attendance</td><td>"+att+"</td></tr>");
+                  $("#viewcourse").html("<tr><th scope='row'>1</th><td>course name</td><td>"+c+"</td></tr><tr><th scope='row'>2</th><td>professor id</td><td>"+i+"</td></tr><tr><th scope='row'>3</th><td>professor name</td><td>"+n+"</td></tr><tr><th scope='row'>4</th><td>Attendance</td><td>"+att+"&nbsp;&nbsp;<button class='btn btn-primary' onclick='track("+myid+")' data-toggle='modal' data-target='#exampleModalLong3'>Track</button></td></tr>");
                   console.log(result);
                 }
                 else
@@ -325,7 +357,7 @@ if(c != ""){
     //For getting all Courses Details
     //<td><a href='#' id='view' class='btn btn-danger kk'  data-toggle='modal' data-target='#exampleModalLong2'>view</a></td>
 
-    AttendanceManagement.getTeachers(function (error, result) {
+    AttendanceManagement.getTeachers({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
       if (!error) {
         $.each(result, function (index, value) {
           AttendanceManagement.getParticularTeacher(value, function (error, result) {
@@ -350,6 +382,45 @@ if(c != ""){
         console.error(error);
     });
 
+
+
+// Tracking
+function track(id){
+AttendanceManagement.incrementAttendance(id,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result){
+  var all_track = []
+              var all_dates = []
+              if(!error){
+                $.each(result, function(index, value){
+                  all_track.push(value);
+                  var t = parseInt(value)*1000;
+                  var date = new Date(t);
+                  if(all_dates.includes(date)==false){
+                    all_dates.push(date);
+                  }
+                });
+                if($("#attend").text() == ""){
+                  for(var i=0;i<all_dates.length;i++){
+                  
+                    $("#attend").append("<tr><td>"+(i+1)+"</td><td>"+all_dates[i]+"</td></tr>");
+                }
+              }
+                all_dates = [];
+                all_track = [];
+                // if (!error) {
+                //   $('#track').modal('show');
+                //   console.log(result);
+                // }
+                // else{
+                //   console.error(error);
+                // }
+                console.log('after '+all_track);
+                console.log('after '+all_dates);
+                console.log(result[0]);
+              }else{
+                console.error(error);
+              }
+            });
+          }
 
     // //according to loftblog tut
     // $('.nav li:first').addClass('active');

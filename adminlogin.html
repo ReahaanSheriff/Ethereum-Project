@@ -40,6 +40,7 @@
 
             <!-- Login Form -->
             <div>
+                <input type="text" id="address" class="fadeIn third" name="login" placeholder="Address">
                 <input type="password" id="password" class="fadeIn third" name="login" placeholder="Admin password">
                 <input type="submit" class="fadeIn fourth" value="Log In" id="adminlogin">
             </div>
@@ -56,15 +57,15 @@
 
         $("#adminlogin").click(function () {
 
-            if ($("#password").val() != "") {
-                var res = AttendanceManagement.adminLogin($("#password").val(),{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
+            if (($("#address").val() != "") && ($("#password").val() != "")) {
+                var res = AttendanceManagement.adminLogin($("#address").val(),$("#password").val(),{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
                 console.log(res);
 
                 if (res == true) {
                     
-                    window.location = "admin.html?message=hi";
+                    window.location = "admin.html?message="+$("#address").val().slice(38,);
                 } else {
-                    alert("Incorrect password");
+                    alert("Incorrect credentials");
                 }
             } else {
                 alert("Empty fields not allowed");

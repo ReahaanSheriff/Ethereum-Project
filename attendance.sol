@@ -30,6 +30,7 @@ contract AttendanceSheet is Owned {
         uint year;
         string degree;
         uint attendanceValue;
+        uint[] tracking;
     }
     
     struct Teacher {
@@ -69,8 +70,8 @@ contract AttendanceSheet is Owned {
    
    
   // Login for Admin
-    function adminLogin(string memory _password) onlyOwner public view returns(bool){
-        if(keccak256(bytes(Owned.password))==keccak256(bytes(_password))){
+    function adminLogin(address _id,string memory _password) onlyOwner public view returns(bool){
+        if((Owned.owner==_id) &&(keccak256(bytes(Owned.password))==keccak256(bytes(_password)))){
             return true;
         }
         else{
@@ -175,20 +176,47 @@ contract AttendanceSheet is Owned {
    function seeCourse(uint _id) public view returns(string){
        return studentList[_id].course;
    }
+   
+     
+
     
-    // Increment attendanceValue for a particular student
-    function incrementAttendance(uint _studId) onlyOwner public {
+    function addAttendance(uint _studId) public onlyOwner {
         studentList[_studId].attendanceValue = studentList[_studId].attendanceValue+1;
+        studentList[_studId].tracking.push(block.timestamp);
+        //time.push(block.timestamp);
     }
     
-    // Decrement attendanceValue for a particular student
-    function decrementAttendance(uint _studId) onlyOwner public {
-        if(studentList[_studId].attendanceValue >= 1){
-            studentList[_studId].attendanceValue = studentList[_studId].attendanceValue-1;
-        }else{
-            studentList[_studId].attendanceValue = 0;
-        }
+    // Increment attendanceValue for a particular student and getting time
+    function incrementAttendance(uint _studId) view  onlyOwner public returns(uint256[]){
+       
+        return studentList[_studId].tracking;
     }
+    
+    
+    // uint256[] public time;
+    
+    // function addAttendance(uint _studId) public onlyOwner {
+    //     studentList[_studId].attendanceValue = studentList[_studId].attendanceValue+1;
+    //     time.push(block.timestamp);
+    // }
+    
+    // // Increment attendanceValue for a particular student and getting time
+    // function incrementAttendance() view  onlyOwner public returns(uint256[]){
+       
+    //     return time;
+    // }
+    
+    // // Decrement attendanceValue for a particular student
+    // function decrementAttendance(uint _studId) onlyOwner public returns(uint256){
+    //     if(studentList[_studId].attendanceValue >= 1){
+    //         studentList[_studId].attendanceValue = studentList[_studId].attendanceValue-1;
+    //         time = block.timestamp;
+    //         return time;
+            
+    //     }else{
+    //         studentList[_studId].attendanceValue = 0;
+    //     }
+    // }
     
     // Get all students IDs
     function getStudents() view public returns(uint[]) {

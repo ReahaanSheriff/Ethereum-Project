@@ -40,8 +40,8 @@
         <li><a href="#top">Home</a></li>
         <li><a href="#top2">My students</a></li>
         <li><a href="#" id="myprofile" data-toggle="modal" data-target="#exampleModalLong1">My Profile</a></li>
-        <li><a href="teacherlogin.html" id="login">Login</a></li>
-        <li><a href="teacher.html" id="logout">Logout</a></li>
+        <li><a href="teacher.html" id="login">Login</a></li>
+        <li><a href="home.html" id="logout">Logout</a></li>
       </ul>
     </nav>
   </header>
@@ -129,7 +129,6 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Inc</th>
-                                    <th scope="col">Dec</th>
                                     <th scope="col"></th>
                                   </tr>
                                 </thead>
@@ -207,7 +206,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Blockchain</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -233,6 +232,38 @@
       </div>
     </div>
   </div>
+  
+
+
+<!-- Modal for Tracking Attendance-->
+<div class="modal fade" id="track" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Attendence History</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Date and Time</th>
+            </tr>
+          </thead>
+          <tbody id="attend"></tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Scripts -->
 <script src="assets/js/abi.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script> -->
@@ -280,7 +311,7 @@ window.history.forward();
 
 //MY profile
 $("#myprofile").click(function(){
-  AttendanceManagement.getParticularTeacher(myid, function (error, result) {
+  AttendanceManagement.getParticularTeacher(myid,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
                 if (!error) {
                   var my = result[0];
                   $("#myprofilebody").html("<tr><th scope='row'>1</th><td>Id</td><td>"+myid+"</td></tr><tr><th scope='row'>2</th><td>Name</td><td>"+result[1]+"</td></tr><tr><th scope='row'>3</th><td>Course</td><td>"+result[2]+"</td></tr><tr><th scope='row'>4</th><td>Department</td><td>"+result[3]+"</td></tr>");
@@ -294,7 +325,7 @@ $("#myprofile").click(function(){
               });
   
 });
-AttendanceManagement.getParticularTeacher(myid, function (error, result) {
+AttendanceManagement.getParticularTeacher(myid,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
                 if (!error) {
                   $("#name").html(result[1]);
 
@@ -308,14 +339,14 @@ AttendanceManagement.getParticularTeacher(myid, function (error, result) {
 
     // Counting No of students
 var count = 0;
-    AttendanceManagement.getStudents(function (error, result) {
+    AttendanceManagement.getStudents({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
       if (!error) {
         
         $.each(result, function (index, value) {
-          AttendanceManagement.getParticularStudent(value, function (error, result) {
+          AttendanceManagement.getParticularStudent(value,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
             if (!error) {
-    var stucourse = AttendanceManagement.seeCourse(result[0]);
-    var teacourse = AttendanceManagement.getParticularTeacher(myid)[2];
+    var stucourse = AttendanceManagement.seeCourse(result[0],{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
+    var teacourse = AttendanceManagement.getParticularTeacher(myid,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000})[2];
     if(stucourse == teacourse){
       count = count + 1;
       $("#stdCountValue").html(count);
@@ -344,17 +375,17 @@ var count = 0;
       //For getting all Students Details
     // <td><button class='btn btn-danger' onclick='viewstudent("+result[0]+")' type='button' data-toggle='modal' data-target='#exampleModalLong2'>view</button></td>
 
-    AttendanceManagement.getStudents(function (error, result) {
+    AttendanceManagement.getStudents({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
       if (!error) {
         
         $.each(result, function (index, value) {
-          AttendanceManagement.getParticularStudent(value, function (error, result) {
+          AttendanceManagement.getParticularStudent(value,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
             if (!error) {
-              var course = AttendanceManagement.seeCourse(result[0]);
-              var tcourse = AttendanceManagement.getParticularTeacher(myid)[2];
+              var course = AttendanceManagement.seeCourse(result[0],{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
+              var tcourse = AttendanceManagement.getParticularTeacher(myid,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000})[2];
                
               if(course == tcourse){
-                $("#tbody").append("<tr><th scope='row'>1</th><td>"+result[0]+"</td><td>"+result[1]+"</td><td><button id='inc' onclick='inc("+result[0]+")' class='btn btn-success'>+</button></td><td><button id='dec' onclick='dec("+result[0]+")' class='btn btn-warning'>-</button></td><td><a href='#' class='btn btn-danger'  onclick='viewstudent("+result[0]+")' data-toggle='modal' data-target='#exampleModalLong2'>view</a></td></tr>");
+                $("#tbody").append("<tr><th scope='row'>1</th><td>"+result[0]+"</td><td>"+result[1]+"</td><td><button id='inc' onclick='inc("+result[0]+")' class='btn btn-success'>+</button></td><td><a href='#' class='btn btn-danger'  onclick='viewstudent("+result[0]+")' data-toggle='modal' data-target='#exampleModalLong2'>view</a></td></tr>");
 
               }
 
@@ -371,13 +402,12 @@ var count = 0;
         console.error(error);
     });
 
-
 // view student
     function viewstudent(id){
-      AttendanceManagement.getParticularStudent(id, function (error, result) {
+      AttendanceManagement.getParticularStudent(id,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
                 if (!error) {
 
-                  $("#newdetails").html("<tr><th scope='row'>1</th><td>Id</td><td>"+result[0]+"</td></tr><tr><th scope='row'>2</th><td>Name</td><td>"+result[1]+"</td></tr><th scope='row'>3</th><td>Attendance</td><td id='ainc'>"+result[2]+"</td></tr><tr><th scope='row'>4</th><td>Department</td><td>"+result[3]+"</td></tr><tr><th scope='row'>5</th><td>Degree</td><td>"+result[4]+"</td></tr><tr><th scope='row'>6</th><td>Year</td><td>"+result[5]+"</td></tr><tr><th scope='row'>7</th><td>Date of birth</td><td>"+result[6]+"</td></tr>");
+                  $("#newdetails").html("<tr><th scope='row'>1</th><td>Id</td><td>"+result[0]+"</td></tr><tr><th scope='row'>2</th><td>Name</td><td>"+result[1]+"</td></tr><th scope='row'>3</th><td>Attendance</td><td id='ainc'>"+result[2]+"&nbsp;&nbsp;<button class='btn btn-primary' onclick='track("+result[0]+")' data-toggle='modal' data-target='#exampleModalLong2'>Track</button></td></tr><tr><th scope='row'>4</th><td>Department</td><td>"+result[3]+"</td></tr><tr><th scope='row'>5</th><td>Degree</td><td>"+result[4]+"</td></tr><tr><th scope='row'>6</th><td>Year</td><td>"+result[5]+"</td></tr><tr><th scope='row'>7</th><td>Date of birth</td><td>"+result[6]+"</td></tr>");
                   // $("#stdDetails").html('Name: ' + result[0] + '<br />' + 'Attendace: ' + result[1] + '<br />' + 'Department : ' + result[2] + '<br />' + 'Degree: ' + result[3] + '<br />' + 'Year: ' + result[4]);
                   
                   // $("#no").append("<tr><th scope='row'>"+(index+1)+"</tr></th>"+'<br />');
@@ -387,7 +417,7 @@ var count = 0;
                   console.log(result);
                 }
       });
-                AttendanceManagement.seeCourse(id, function (error, result) {
+                AttendanceManagement.seeCourse(id,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
                 $("#newdetails").append("<tr><th scope='row'>8</th><td>Course</td><td>"+result+"</td></tr>");
                 if (!error) {
                   $('#myModal').modal('show');
@@ -399,14 +429,50 @@ var count = 0;
               });
   }
 
+// Tracking
+function track(id){
+AttendanceManagement.incrementAttendance(id,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result){
+  var all_track = []
+              var all_dates = []
+              if(!error){
+                $.each(result, function(index, value){
+                  all_track.push(value);
+                  var t = parseInt(value)*1000;
+                  var date = new Date(t);
+                  if(all_dates.includes(date)==false){
+                    all_dates.push(date);
+                  }
+                });
+                if($("#attend").text() == ""){
+                  for(var i=0;i<all_dates.length;i++){
+                  
+                    $("#attend").append("<tr><td>"+(i+1)+"</td><td>"+all_dates[i]+"</td></tr>");
+                }
+              }
+                all_dates = [];
+                all_track = [];
+                if (!error) {
+                  $('#track').modal('show');
+                  console.log(result);
+                }
+                else{
+                  console.error(error);
+                }
+                console.log('after '+all_track);
+                console.log('after '+all_dates);
+                console.log(result[0]);
+              }else{
+                console.error(error);
+              }
+            });
+          }
   // Increment attendance
+  
   function inc(id){
-
-            AttendanceManagement.incrementAttendance(id,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
-            AttendanceManagement.getParticularStudent(id, function (error, result) {
+            AttendanceManagement.addAttendance(id,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
+            AttendanceManagement.getParticularStudent(id,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
                 if (!error) {
                     $("#ainc").html(result[2]);
-
                     console.log(result);
                 }
                 else
@@ -415,21 +481,21 @@ var count = 0;
         
       }
 
-     // Decrement attendance
-  function dec(id){
+//      // Decrement attendance
+//   function dec(id){
 
-AttendanceManagement.decrementAttendance(id,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
-AttendanceManagement.getParticularStudent(id, function (error, result) {
-    if (!error) {
-        $("#ainc").html(result[2]);
+// AttendanceManagement.decrementAttendance(id,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
+// AttendanceManagement.getParticularStudent(id, function (error, result) {
+//     if (!error) {
+//         $("#ainc").html(result[2]);
 
-        console.log(result);
-    }
-    else
-        console.error(error);
-});
+//         console.log(result);
+//     }
+//     else
+//         console.error(error);
+// });
 
-}
+// }
 
 // Search student
 var tempo = [];
@@ -437,7 +503,7 @@ var tempo = [];
     // Search for students
     $('#find').click(function () {
       if ($("#searchtext").val() != "") {
-        AttendanceManagement.getStudents(function (error, result) {
+        AttendanceManagement.getStudents({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
 
           if (!error) {
             $.each(result, function (index, value) {
@@ -449,7 +515,7 @@ var tempo = [];
             });
             if (sid.includes(parseInt($("#searchtext").val())) === true) {
 
-              AttendanceManagement.getParticularStudent($("#searchtext").val(), function (error, result) {
+              AttendanceManagement.getParticularStudent($("#searchtext").val(),{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
                 if (!error) {
 
                   $("#newdetails").html("<tr><th scope='row'>1</th><td>Id</td><td>"+result[0]+"</td></tr><tr><th scope='row'>2</th><td>Name</td><td>"+result[1]+"</td></tr><th scope='row'>3</th><td>Attendance</td><td>"+result[2]+"</td></tr><tr><th scope='row'>4</th><td>Department</td><td>"+result[3]+"</td></tr><tr><th scope='row'>5</th><td>Degree</td><td>"+result[4]+"</td></tr><tr><th scope='row'>6</th><td>Year</td><td>"+result[5]+"</td></tr><tr><th scope='row'>7</th><td>Date of birth</td><td>"+result[6]+"</td></tr>");
@@ -461,7 +527,7 @@ var tempo = [];
                 else
                   console.error(error);
               });
-              AttendanceManagement.seeCourse($("#searchtext").val(), function (error, result) {
+              AttendanceManagement.seeCourse($("#searchtext").val(),{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
                 $("#newdetails").append("<tr><th scope='row'>8</th><td>Course</td><td>"+result+"</td></tr>");
                 if (!error) {
                   console.log(result);
