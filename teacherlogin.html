@@ -62,7 +62,7 @@
 
         $("#plogin").click(function () {
             if (($("#id").val() != "") && ($("#password").val() != "")) {
-                var res = AttendanceManagement.loginTeacher($("#id").val(), $("#password").val(),{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
+                var res = AttendanceManagement.loginTeacher($("#id").val(), $("#password").val(),{from:acctFromAddress,gas:3000000});
                 console.log(res);
                 if (res[1] == "login successfully") {
                     window.location = 'teacher.html?message='+$("#id").val();

@@ -8,6 +8,8 @@ if (typeof web3 !== 'undefined') {
 
     var attendanceContract = web3.eth.contract(abi);
 
-    var AttendanceManagement = attendanceContract.at('0xef07AAA0360BabeDfD4fd73FCD7210E48541956a');
+    var acctFromAddress="0x00f4e7EAcD5127473183e52eFe1776d1d19a6895";
+
+    var AttendanceManagement = attendanceContract.at('0x72E3B6EdFf7bEE99404c0fbcb863144c6fc81Faf');
     console.log(AttendanceManagement);
 }

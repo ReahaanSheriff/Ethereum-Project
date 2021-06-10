@@ -58,7 +58,7 @@
         $("#adminlogin").click(function () {
 
             if (($("#address").val() != "") && ($("#password").val() != "")) {
-                var res = AttendanceManagement.adminLogin($("#address").val(),$("#password").val(),{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
+                var res = AttendanceManagement.adminLogin($("#address").val(),$("#password").val(),{from:acctFromAddress,gas:3000000});
                 console.log(res);
 
                 if (res == true) {

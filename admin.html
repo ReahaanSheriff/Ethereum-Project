@@ -370,7 +370,6 @@
 
 
 
-
 var id=window.location.search;
 var myid = id.slice(9,);
 console.log(myid);
@@ -395,7 +394,7 @@ window.history.forward();
     $("#form-submit").click(function () {
 
       if (($("#id").val() != "") && ($("#dob").val() != "") && ($("#fname").val() != "") && ($("#dept").val() != "") && ($("#degree").val() != "") && ($("#year").val() != "")) {
-        AttendanceManagement.getStudents({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
+        AttendanceManagement.getStudents({from:acctFromAddress,gas:3000000},function (error, result) {
 
           if (!error) {
             $.each(result, function (index, value) {
@@ -410,7 +409,7 @@ window.history.forward();
               alert("id already there");
 
             } else {
-              AttendanceManagement.createStudent(parseInt($("#id").val()), parseInt($("#dob").val()), $("#fname").val(), $("#dept").val(), $("#degree").val(), parseInt($("#year").val()), {from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
+              AttendanceManagement.createStudent(parseInt($("#id").val()), parseInt($("#dob").val()), $("#fname").val(), $("#dept").val(), $("#degree").val(), parseInt($("#year").val()), {from:acctFromAddress,gas:3000000});
               alert('Enrolled successfully');
             }
           }
@@ -428,7 +427,7 @@ window.history.forward();
 
 
     $("#stdCount").click(function () {
-      AttendanceManagement.countStudents({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
+      AttendanceManagement.countStudents({from:acctFromAddress,gas:3000000},function (error, result) {
         if (!error) {
           $("#stdCountValue").html(result["c"][0]);
 
@@ -444,7 +443,7 @@ window.history.forward();
 
 
     $("#profCount").click(function () {
-      AttendanceManagement.countTeachers({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
+      AttendanceManagement.countTeachers({from:acctFromAddress,gas:3000000},function (error, result) {
         if (!error) {
           $("#profCountValue").html(result["c"][0]);
 
@@ -459,7 +458,7 @@ window.history.forward();
 
 
     $("#courseCount").click(function () {
-      AttendanceManagement.countTeachers({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
+      AttendanceManagement.countTeachers({from:acctFromAddress,gas:3000000},function (error, result) {
         if (!error) {
           $("#courseCountValue").html(result["c"][0]);
 
@@ -477,12 +476,12 @@ window.history.forward();
     //For getting all Students Details
     // <td><button class='btn btn-danger' onclick='viewstudent("+result[0]+")' type='button' data-toggle='modal' data-target='#exampleModalLong2'>view</button></td>
 
-    AttendanceManagement.getStudents({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
+    AttendanceManagement.getStudents({from:acctFromAddress,gas:3000000},function (error, result) {
       if (!error) {
         $.each(result, function (index, value) {
           AttendanceManagement.getParticularStudent(value, function (error, result) {
             if (!error) {
-              $("#tbody").append("<tr><th scope='row'>" + (index + 1) + "</th><td>" + result[0] + "</td><td>" + result[1] + "</td><td>" + result[3] + "</td><td>" + result[4] + "</td><td>" + result[5] + "</td><td><button class='btn btn-danger' onclick='viewstudent("+result[0]+")' type='button' data-toggle='modal' data-target='#exampleModalLong2'>view</button></td></tr>");
+              $("#tbody").append("<tr><th scope='row'>" + (index) + "</th><td>" + result[0] + "</td><td>" + result[1] + "</td><td>" + result[3] + "</td><td>" + result[4] + "</td><td>" + result[5] + "</td><td><button class='btn btn-danger' onclick='viewstudent("+result[0]+")' type='button' data-toggle='modal' data-target='#exampleModalLong2'>view</button></td></tr>");
 
              
 
@@ -501,7 +500,7 @@ window.history.forward();
 
 
     function viewstudent(id){
-      AttendanceManagement.getParticularStudent(id,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
+      AttendanceManagement.getParticularStudent(id,{from:acctFromAddress,gas:3000000}, function (error, result) {
                 if (!error) {
 
                   $("#newdetails").html("<tr><th scope='row'>1</th><td>Id</td><td>"+result[0]+"</td></tr><tr><th scope='row'>2</th><td>Name</td><td>"+result[1]+"</td></tr><th scope='row'>3</th><td>Attendance</td><td>"+result[2]+"</td></tr><tr><th scope='row'>4</th><td>Department</td><td>"+result[3]+"</td></tr><tr><th scope='row'>5</th><td>Degree</td><td>"+result[4]+"</td></tr><tr><th scope='row'>6</th><td>Year</td><td>"+result[5]+"</td></tr><tr><th scope='row'>7</th><td>Date of birth</td><td>"+result[6]+"</td></tr>");
@@ -514,7 +513,7 @@ window.history.forward();
                   console.log(result);
                 }
       });
-                AttendanceManagement.seeCourse(id,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
+                AttendanceManagement.seeCourse(id,{from:acctFromAddress,gas:3000000}, function (error, result) {
                 $("#newdetails").append("<tr><th scope='row'>8</th><td>Course</td><td>"+result+"</td></tr>");
                 if (!error) {
                   $('#myModal').modal('show');
@@ -531,10 +530,10 @@ window.history.forward();
     //For getting all Courses Details
     //<td><a href='#' id='view' class='btn btn-danger kk'  data-toggle='modal' data-target='#exampleModalLong2'>view</a></td>
 
-    AttendanceManagement.getTeachers({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
+    AttendanceManagement.getTeachers({from:acctFromAddress,gas:3000000},function (error, result) {
       if (!error) {
         $.each(result, function (index, value) {
-          AttendanceManagement.getParticularTeacher(value,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
+          AttendanceManagement.getParticularTeacher(value,{from:acctFromAddress,gas:3000000}, function (error, result) {
             if (!error) {
 
 
@@ -559,10 +558,10 @@ window.history.forward();
     //For getting all Professors Details
     //<td><a href='#' id='view' class='btn btn-danger kk'  data-toggle='modal' data-target='#exampleModalLong2'>view</a></td>
 
-    AttendanceManagement.getTeachers({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
+    AttendanceManagement.getTeachers({from:acctFromAddress,gas:3000000},function (error, result) {
       if (!error) {
         $.each(result, function (index, value) {
-          AttendanceManagement.getParticularTeacher(value,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
+          AttendanceManagement.getParticularTeacher(value,{from:acctFromAddress,gas:3000000}, function (error, result) {
             if (!error) {
               $("#pbody").append("<tr><th scope='row'>" + (index + 1) + "</th><td>" + result[0] + "</td><td>" + result[1] + "</td><td>" + result[2] + "</td><td>" + result[3] + "</td></tr>");
 
@@ -593,7 +592,7 @@ window.history.forward();
     // Search for students
     $('#find').click(function () {
       if ($("#searchtext").val() != "") {
-        AttendanceManagement.getStudents({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
+        AttendanceManagement.getStudents({from:acctFromAddress,gas:3000000},function (error, result) {
 
           if (!error) {
             $.each(result, function (index, value) {
@@ -605,7 +604,7 @@ window.history.forward();
             });
             if (sid.includes(parseInt($("#searchtext").val())) === true) {
 
-              AttendanceManagement.getParticularStudent($("#searchtext").val(),{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
+              AttendanceManagement.getParticularStudent($("#searchtext").val(),{from:acctFromAddress,gas:3000000}, function (error, result) {
                 if (!error) {
 
                   $("#newdetails").html("<tr><th scope='row'>1</th><td>Id</td><td>"+result[0]+"</td></tr><tr><th scope='row'>2</th><td>Name</td><td>"+result[1]+"</td></tr><th scope='row'>3</th><td>Attendance</td><td>"+result[2]+"</td></tr><tr><th scope='row'>4</th><td>Department</td><td>"+result[3]+"</td></tr><tr><th scope='row'>5</th><td>Degree</td><td>"+result[4]+"</td></tr><tr><th scope='row'>6</th><td>Year</td><td>"+result[5]+"</td></tr><tr><th scope='row'>7</th><td>Date of birth</td><td>"+result[6]+"</td></tr>");
@@ -617,7 +616,7 @@ window.history.forward();
                 else
                   console.error(error);
               });
-              AttendanceManagement.seeCourse($("#searchtext").val(),{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
+              AttendanceManagement.seeCourse($("#searchtext").val(),{from:acctFromAddress,gas:3000000}, function (error, result) {
                 $("#newdetails").append("<tr><th scope='row'>8</th><td>Course</td><td>"+result+"</td></tr>");
                 if (!error) {
                   console.log(result);
@@ -646,7 +645,7 @@ var tempp = [];
     // Search for students
     $('#search').click(function () {
       if ($("#searchprofs").val() != "") {
-        AttendanceManagement.getTeachers({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
+        AttendanceManagement.getTeachers({from:acctFromAddress,gas:3000000},function (error, result) {
 
           if (!error) {
             $.each(result, function (index, value) {
@@ -658,7 +657,7 @@ var tempp = [];
             });
             if (tid.includes(parseInt($("#searchprofs").val())) === true) {
 
-              AttendanceManagement.getParticularTeacher($("#searchprofs").val(),{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
+              AttendanceManagement.getParticularTeacher($("#searchprofs").val(),{from:acctFromAddress,gas:3000000}, function (error, result) {
                 if (!error) {
 
                   $("#newdetails").html("<tr><th scope='row'>1</th><td>Id</td><td>"+result[0]+"</td></tr><tr><th scope='row'>2</th><td>Name</td><td>"+result[1]+"</td></tr><th scope='row'>3</th><td>Course</td><td>"+result[2]+"</td></tr><tr><th scope='row'>4</th><td>Department</td><td>"+result[3]+"</td></tr>");

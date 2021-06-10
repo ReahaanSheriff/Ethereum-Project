@@ -105,7 +105,7 @@
                         }else if(allCourses.includes($("#course").val()) == true){
                             alert("course already there");
                         }else {
-                            AttendanceManagement.createTeacher(parseInt($("#id").val()), $("#name").val(), $("#course").val().toLowerCase(), $("#dept").val(), $("#password").val(), {from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000});
+                            AttendanceManagement.createTeacher(parseInt($("#id").val()), $("#name").val(), $("#course").val().toLowerCase(), $("#dept").val(), $("#password").val(), {from:acctFromAddress,gas:3000000});
                             $("#message").html("Registered successfully");
                         }
                     }

@@ -283,7 +283,7 @@ if(id==""){
                   
 //MY profile
 $("#profile").click(function(){
-  AttendanceManagement.getParticularStudent(myid,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
+  AttendanceManagement.getParticularStudent(myid,{from:acctFromAddress,gas:3000000}, function (error, result) {
                 if (!error) {
                   var my = result[0];
                   $("#profilebody").html("<tr><th scope='row'>1</th><td>id</td><td>"+result[0]+"</td></tr><tr><th scope='row'>2</th><td>name</td><td>"+result[1]+"</td></tr><tr><th scope='row'>3</th><td>Date Of Birth</td><td>"+result[6]+"</td></tr><tr><th scope='row'>4</th><td>Department</td><td>"+result[3]+"</td></tr><tr><th scope='row'>5</th><td>Degree</td><td>"+result[4]+"</td></tr><tr><th scope='row'>6</th><td>Year</td><td>"+result[5]+"</td></tr>");
@@ -297,7 +297,7 @@ $("#profile").click(function(){
               });
   
 });
-AttendanceManagement.getParticularStudent(myid,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
+AttendanceManagement.getParticularStudent(myid,{from:acctFromAddress,gas:3000000}, function (error, result) {
                 if (!error) {
                   $("#name").html(result[1]);
 
@@ -309,7 +309,7 @@ AttendanceManagement.getParticularStudent(myid,{from:"0x00f4e7EAcD5127473183e52e
 
 
 // Course
-var c = AttendanceManagement.seeCourse(myid,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895", gas: 3000000 });
+var c = AttendanceManagement.seeCourse(myid,{from:acctFromAddress, gas: 3000000 });
 $("#mycoursename").html(c);
 // Enrolling course
 
@@ -317,7 +317,7 @@ $("#form-submit").click(function(){
   if(($("#myid").val() != "") && ($("#mycourse").val() != "")){
     if($("#myid").val() == myid){
     if(c == ""){
-      AttendanceManagement.enrollCourse(parseInt($("#myid").val()),$("#mycourse").val().toLowerCase(),{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895", gas: 3000000 });
+      AttendanceManagement.enrollCourse(parseInt($("#myid").val()),$("#mycourse").val().toLowerCase(),{from:acctFromAddress, gas: 3000000 });
     }else{
         alert("Already enrolled");
       }
@@ -334,7 +334,7 @@ $("#form-submit").click(function(){
 var i = AttendanceManagement.tecourse(c)[0];
 var n = AttendanceManagement.tecourse(c)[1];
 $("#specific").click(function(){
-  AttendanceManagement.getParticularStudent(myid,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000}, function (error, result) {
+  AttendanceManagement.getParticularStudent(myid,{from:acctFromAddress,gas:3000000}, function (error, result) {
                 if (!error) {
                   var att = result[2];
                   $("#viewcourse").html("<tr><th scope='row'>1</th><td>course name</td><td>"+c+"</td></tr><tr><th scope='row'>2</th><td>professor id</td><td>"+i+"</td></tr><tr><th scope='row'>3</th><td>professor name</td><td>"+n+"</td></tr><tr><th scope='row'>4</th><td>Attendance</td><td>"+att+"&nbsp;&nbsp;<button class='btn btn-primary' onclick='track("+myid+")' data-toggle='modal' data-target='#exampleModalLong3'>Track</button></td></tr>");
@@ -357,7 +357,7 @@ if(c != ""){
     //For getting all Courses Details
     //<td><a href='#' id='view' class='btn btn-danger kk'  data-toggle='modal' data-target='#exampleModalLong2'>view</a></td>
 
-    AttendanceManagement.getTeachers({from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result) {
+    AttendanceManagement.getTeachers({from:acctFromAddress,gas:3000000},function (error, result) {
       if (!error) {
         $.each(result, function (index, value) {
           AttendanceManagement.getParticularTeacher(value, function (error, result) {
@@ -386,7 +386,7 @@ if(c != ""){
 
 // Tracking
 function track(id){
-AttendanceManagement.incrementAttendance(id,{from:"0x00f4e7EAcD5127473183e52eFe1776d1d19a6895",gas:3000000},function (error, result){
+AttendanceManagement.incrementAttendance(id,{from:acctFromAddress,gas:3000000},function (error, result){
   var all_track = []
               var all_dates = []
               if(!error){
